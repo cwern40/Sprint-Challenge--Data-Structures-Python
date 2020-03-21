@@ -23,48 +23,46 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
-        cur_node = self
-        right_node = self.right
-        left_node = self.left
-        loop = True
-        while loop == True:
-            loop = False
-            if value == cur_node.value:
-                duplicates.append(value)
-            elif value[0] > cur_node.value[0]:
-                if right_node == None:
-                    cur_node.right = BinarySearchTree(value)
-                else:
-                    cur_node = right_node
-                    right_node = cur_node.right
-                    left_node = cur_node.left
-                    loop = True
-            elif value[0] < cur_node.value[0]:
-                if left_node == None:
-                    cur_node.left = BinarySearchTree(value)
-                else:
-                    cur_node = left_node
-                    right_node = cur_node.right
-                    left_node = cur_node.left
-                    loop = True
+        if value == self.value:
+            return
+        if value > self.value:
+            if self.right == None:
+                self.right = BinarySearchTree(value)
+            else:
+                self.right.insert(value)
+        else:
+            if self.left == None:
+                self.left = BinarySearchTree(value)
+            else:
+                self.left.insert(value)
 
-        # if value[0] > self.value[0]:
-        #     cur_node = self.right
-        #     if cur_node == None:
-        #         self.right = BinarySearchTree(value)
-        #     else:
-        #         self.right.insert(value)
-        # else:
-        #     if self.left == None:
-        #         self.left = BinarySearchTree(value)
-        #     else:
-        #         self.left.insert(value)
+    # Return True if the tree contains the value
+    # False if it does not
+    def contains(self, target):
+        if target == self.value:
+            return True
+        if target > self.value:
+            if self.right == None:
+                return False
+            else:
+                return self.right.contains(target)
+        if target < self.value:
+            if self.left == None:
+                return False
+            else:
+                return self.left.contains(target)
 search_tree = BinarySearchTree('M')
 for name_1 in names_1:
     search_tree.insert(name_1)
 
-# for name_2 in names_2:
-#     search_tree.insert(name_2)
+for name_2 in names_2:
+    if search_tree.contains(name_2) is True:
+        duplicates.append(name_2)
+
+# for name_1 in names_1:
+#     for name_2 in names_2:
+#         if name_1 == name_2:
+#             duplicates.append(name_1)
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")

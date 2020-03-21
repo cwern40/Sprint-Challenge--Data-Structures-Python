@@ -193,7 +193,7 @@ class ArrayRingBuffer:
         pass
 
 buffer = RingBuffer(5)
-for i in range(23):
+for i in range(22):
     buffer.append(i)
 print(buffer.storage.head.value)
 print(buffer.current.next.value)
