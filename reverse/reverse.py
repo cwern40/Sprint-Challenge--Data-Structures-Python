@@ -62,14 +62,4 @@ class LinkedList:
         self.head = current_node
         next_node = None
       elif current_node is not None:
-        next_node = current_node.get_next()
-
-reverse = LinkedList()
-
-reverse.add_to_head(1)
-print(reverse.head.value)
-reverse.add_to_head(2)
-print(reverse.head.value)
-reverse.reverse_list()
-print(reverse.head.value)
-    
+        next_node = current_node.get_next()    
